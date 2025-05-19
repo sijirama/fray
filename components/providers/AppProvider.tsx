@@ -6,6 +6,7 @@ import { AuthUIProvider } from "@daveyplate/better-auth-ui";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -25,6 +26,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           {children}
         </ThemeProvider>
       </AuthUIProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
