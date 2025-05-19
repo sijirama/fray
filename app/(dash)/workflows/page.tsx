@@ -1,3 +1,4 @@
+import CreateWorkflowDialog from "@/components/blocks/workflows/CreateWorkflowDialog";
 import UserWorkflows from "@/components/blocks/workflows/Userworkflows";
 import UserworkflowsSkeleton from "@/components/blocks/workflows/UserworkflowsSkeleton";
 import { Suspense } from "react";
@@ -10,6 +11,7 @@ export default function Page() {
           <h1 className="3xl font-bold">Workflows</h1>
           <p className="text-muted-foreground">Manage your workflows</p>
         </div>
+        <CreateWorkflowDialog />
       </div>
 
       <div className="h-full py-6">
