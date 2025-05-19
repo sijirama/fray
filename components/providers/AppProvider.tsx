@@ -1,26 +1,30 @@
 "use client";
 
 import { ThemeProvider } from "next-themes";
-import React from "react";
+import React, { useState } from "react";
 import { AuthUIProvider } from "@daveyplate/better-auth-ui";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [queryCient] = useState(() => new QueryClient());
 
   return (
-    <AuthUIProvider
-      authClient={authClient}
-      navigate={router.push}
-      replace={router.replace}
-      onSessionChange={() => {
-        router.refresh();
-      }}
-    >
-      <ThemeProvider attribute={"class"} defaultTheme="dark" enableSystem>
-        {children}
-      </ThemeProvider>
-    </AuthUIProvider>
+    <QueryClientProvider client={queryCient}>
+      <AuthUIProvider
+        authClient={authClient}
+        navigate={router.push}
+        replace={router.replace}
+        onSessionChange={() => {
+          router.refresh();
+        }}
+      >
+        <ThemeProvider attribute={"class"} defaultTheme="dark" enableSystem>
+          {children}
+        </ThemeProvider>
+      </AuthUIProvider>
+    </QueryClientProvider>
   );
 }
