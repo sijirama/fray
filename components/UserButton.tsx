@@ -84,7 +84,7 @@ export default function UserButton({ showName = false }: Props) {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="p-8 py-4">
+      <DropdownMenuContent align="end" className="p-3 py-4">
         <DropdownMenuLabel className="font-normal w-full">
           <div className="flex flex-col space-y-1 w-full">
             <p className="text-sm font-medium">{user.name || "User"}</p>

@@ -1,5 +1,4 @@
 "use client";
-
 import { HomeIcon, Layers2Icon, MenuIcon, ShieldCheckIcon } from "lucide-react";
 import Logo from "./Logo";
 import Link from "next/link";
@@ -10,18 +9,17 @@ import { useState } from "react";
 
 const routes = [
   {
-    href: "",
+    href: "/", // Change empty string to "/" for the home route
     label: "Home",
     icon: HomeIcon,
   },
   {
-    href: "workflows",
+    href: "/workflows", // Add leading slashes to paths
     label: "Workflows",
     icon: Layers2Icon,
   },
-
   {
-    href: "credentials",
+    href: "/credentials", // Add leading slashes to paths
     label: "Credentials",
     icon: ShieldCheckIcon,
   },
@@ -29,10 +27,14 @@ const routes = [
 
 function DesktopSidebar() {
   const pathName = usePathname();
+
+  // Improved active route detection logic
   const activeRoute =
+    routes.find((route) => pathName === route.href) ||
     routes.find(
-      (route) => route.href.length > 0 && pathName.includes(route.href),
-    ) || routes[0];
+      (route) => route.href !== "/" && pathName.startsWith(route.href),
+    ) ||
+    routes[0];
 
   return (
     <div
@@ -40,7 +42,6 @@ function DesktopSidebar() {
 			h-screen overflow-hidden w-full bg-primary/5
 			dark:bg-secondary/30 dark:text-foreground
 			text-muted-foreground border-r-2 border-separate
-
 		"
     >
       <div className="flex items-center justify-start gap-2 border-b-[1px] border-separate p-4">
@@ -71,10 +72,14 @@ function DesktopSidebar() {
 export function MobileSidebar() {
   const [isOpen, setOpen] = useState(false);
   const pathName = usePathname();
+
+  // Use the same improved logic for mobile
   const activeRoute =
+    routes.find((route) => pathName === route.href) ||
     routes.find(
-      (route) => route.href.length > 0 && pathName.includes(route.href),
-    ) || routes[0];
+      (route) => route.href !== "/" && pathName.startsWith(route.href),
+    ) ||
+    routes[0];
 
   return (
     <div className="block border-separate bg-background md:hidden">
