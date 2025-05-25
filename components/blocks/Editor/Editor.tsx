@@ -13,7 +13,7 @@ export default function Editor(props: Props) {
       <div className="flex flex-col h-full w-full overflow-hidden ">
         <Topbar
           title={props.workflow.name}
-          subtitle={"Working type shit"}
+          subtitle={props.workflow.description || ""}
           workflowId={props.workflow.id}
         />
         <section className="flex h-full overflow-auto">

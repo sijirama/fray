@@ -2,6 +2,7 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { WorkflowStatus } from "@/types/workflow";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 
 export async function updateWorkflow({
@@ -40,4 +41,6 @@ export async function updateWorkflow({
       definition,
     },
   });
+
+  revalidatePath("/workflows");
 }

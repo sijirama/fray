@@ -3,7 +3,11 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { headers } from "next/headers";
 
-export default async function Page(params: any) {
+export default async function Page({
+  params,
+}: {
+  params: { workflowId: string };
+}) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
