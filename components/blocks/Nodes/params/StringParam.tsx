@@ -10,6 +10,7 @@ export default function StringParam({
   param,
   value,
   updateNodeParamValue,
+  disabled,
 }: ParamProps) {
   const [internalValue, setInternalValue] = useState(value);
   const id = useId();
@@ -34,9 +35,10 @@ export default function StringParam({
         id={id}
         className="text-xs"
         value={internalValue}
+        disabled={disabled}
         placeholder="Enter value here"
-        onChange={(e) => setInternalValue(e.target.value)}
-        onBlur={(e) => updateNodeParamValue(e.target.value)}
+        onChange={(e: any) => setInternalValue(e.target.value)}
+        onBlur={(e: any) => updateNodeParamValue(e.target.value)}
       />
       {param.helperText && (
         <p className="text-muted-foreground px-2">{param.helperText}</p>

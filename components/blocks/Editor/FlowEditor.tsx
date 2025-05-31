@@ -83,6 +83,7 @@ export default function FlowEditor(props: Props) {
       if (!node) return;
 
       const nodeInputs = node.data.inputs;
+      //console.log(nodeInputs, connection);
       updateNodeData(node.id, {
         inputs: {
           ...nodeInputs,
