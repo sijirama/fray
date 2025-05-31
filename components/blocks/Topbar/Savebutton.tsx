@@ -25,7 +25,7 @@ export default function Savebutton({ workflowId }: { workflowId: string }) {
       className="flex items-center gap-2"
       onClick={() => {
         const workflowDefnition = JSON.stringify(toObject());
-        toast.loading("Saveing workflow", { id: "save-workflow" });
+        toast.loading("Saving workflow", { id: "save-workflow" });
         saveMutation.mutate({ id: workflowId, definition: workflowDefnition });
       }}
     >
