@@ -36,7 +36,7 @@ export default function StringParam({
         className="text-xs"
         value={internalValue}
         disabled={disabled}
-        placeholder="Enter value here"
+        placeholder={!disabled && "Enter value here"}
         onChange={(e: any) => setInternalValue(e.target.value)}
         onBlur={(e: any) => updateNodeParamValue(e.target.value)}
       />
