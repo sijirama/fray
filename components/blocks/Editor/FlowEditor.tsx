@@ -40,7 +40,7 @@ const fitViewOptions = { padding: 2.5 };
 export default function FlowEditor(props: Props) {
   const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
-  const { setViewport, screenToFlowPosition } = useReactFlow();
+  const { setViewport, screenToFlowPosition, updateNodeData } = useReactFlow();
 
   useEffect(() => {
     try {
@@ -73,9 +73,25 @@ export default function FlowEditor(props: Props) {
     setNodes((nds) => nds.concat(newNode));
   }, []);
 
-  const onConnect = useCallback((connection: Connection) => {
-    setEdges((eds) => addEdge({ ...connection, animated: true }, eds));
-  }, []);
+  const onConnect = useCallback(
+    (connection: Connection) => {
+      setEdges((eds) => addEdge({ ...connection, animated: true }, eds));
+      if (!connection.targetHandle) return;
+
+      // Remove input value if is present on connection
+      const node = nodes.find((nd) => nd.id === connection.target);
+      if (!node) return;
+
+      const nodeInputs = node.data.inputs;
+      updateNodeData(node.id, {
+        inputs: {
+          ...nodeInputs,
+          [connection.targetHandle]: "",
+        },
+      });
+    },
+    [setEdges, updateNodeData],
+  );
 
   return (
     <main className="h-full w-full">
