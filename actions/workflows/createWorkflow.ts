@@ -27,7 +27,7 @@ export async function CreateWorkflow(form: createWorkflowType) {
     nodes: [],
     edges: [],
   };
-  initialFlow.nodes.push(CreateFrayNode(TaskType.LAUnCH_BROWSER));
+  initialFlow.nodes.push(CreateFrayNode(TaskType.LAUNCH_BROWSER));
 
   const result = await db.workflow.create({
     data: {
