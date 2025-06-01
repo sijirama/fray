@@ -5,7 +5,7 @@ import { PageToHtmlTask } from "./PageToHtml";
 import { TaskType } from "@/types/task";
 
 type Registry = {
-  [k in TaskType]: WorkflowTask;
+  [k in TaskType]: WorkflowTask & { type: k };
 };
 
 export const TaskRegistry: Registry = {
