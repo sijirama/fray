@@ -1,5 +1,6 @@
 "use server";
 import { auth } from "@/lib/auth";
+import { db } from "@/lib/db";
 import { headers } from "next/headers";
 
 export async function GetWorkflowsForUser() {
@@ -9,7 +10,7 @@ export async function GetWorkflowsForUser() {
   if (!session) {
     throw new Error("Unauthenticated");
   }
-  return prisma?.workflow.findMany({
+  return db?.workflow.findMany({
     where: {
       userId: session.user.id,
     },
